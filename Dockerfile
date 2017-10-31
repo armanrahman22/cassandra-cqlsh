@@ -48,9 +48,9 @@ WORKDIR /root
 # SparkContext web UI on 4040 -- only available for the duration of the application.
 # Spark master’s web UI on 8080.
 # Spark worker web UI on 8081.
-EXPOSE 4040 8080 8081
+# EXPOSE 4040 8080 8081
 
 RUN git clone https://github.com/CatalystCode/project-fortis-spark.git
 RUN cd project-fortis-spark && sbt assembly
 
-CMD ["/bin/bash"]
+# CMD ["/bin/bash"]

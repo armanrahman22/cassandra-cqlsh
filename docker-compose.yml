@@ -3,24 +3,27 @@ services:
   fortis:
     build: .
     env_file: .env
+    links:
+      - "cassandra:db"
+    tty: true
+    command: /bin/bash
   cassandra:
-    hostname: cassandra-host
-    image: cassandra:3
-    command: /bin/bash -c "sleep 1 && echo ' -- Pausing to let system catch up ... -->' && /docker-entrypoint.sh cassandra -f"
+    hostname: cassandra-host #why?
+    image: cassandra:3 
+    tty: true
+    command: /docker-entrypoint.sh cassandra -f
     expose:
       - 7000
       - 7001
       - 7199
       - 9042
       - 9160
-    volumes: # uncomment if you desire mounts, also uncomment cluster.sh
-    - ./data/cassandra-1:/var/lib/cassandra:rw
   cassandra-client:
-    hostname: cassandra-client
-    links:
-      - "cassandra:db"
+    hostname: cassandra-client #why?
     image: cassandra:3
-    command: /bin/bash -c "sleep 1 && echo ' -- Pausing to let system catch up ... -->' && sleep infinity"
-    #command: /bin/bash -c "sleep 1 && echo ' -- Pausing to let system catch up ... -->' && /docker-entrypoint.sh cassandra -f"
+    depends_on:
+      - cassandra
     volumes: # uncomment if you desire mounts, also uncomment cluster.sh
       - ./scripts:/home:rw
+    tty: true
+    command: /bin/bash -c "sleep 1 && echo ' -- Pausing to let system catch up ... -->' && ./home/setupCassandra.sh && sleep infinity"
