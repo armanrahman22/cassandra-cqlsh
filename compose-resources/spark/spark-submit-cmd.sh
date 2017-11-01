@@ -1,0 +1,1 @@
+spark-submit --driver-memory 4g --class com.microsoft.partnercatalyst.fortis.spark.ProjectFortis ~/project-fortis-spark/target/scala-2.11/project-fortis-spark-assembly-0.0.29.jar

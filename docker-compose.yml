@@ -1,5 +1,6 @@
 version: '3'
 services:
+
 ######## CASSANDRA ########
   cassandra-node1:
     image: cassandra:3
@@ -10,19 +11,8 @@ services:
       CASSANDRA_ENDPOINT_SNITCH: "GossipingPropertyFileSnitch"
       CASSANDRA_DC: "DATA"
     restart: always 
-    ports:
-      - "9042:9042"
-  cassandra-node2:
-      image: cassandra:3
-      environment:
-        CASSANDRA_SEEDS: "cassandra-node1"
-        WAIT_TIMEOUT: "60"
-        JVM_OPTS: "-Dcassandra.consistent.rangemovement=false"
-        CASSANDRA_CLUSTER_NAME: "DemoCluster"
-        CASSANDRA_ENDPOINT_SNITCH: "GossipingPropertyFileSnitch"
-        CASSANDRA_DC: "DATA"
-      ports:
-          - "9043:9042"
+    expose:
+      - 9042
   cassandra-init:
     image: cassandra:3
     volumes:
@@ -30,8 +20,15 @@ services:
     command: bash /init/scripts/cassandra-init.sh
     links:
       - cassandra-node1:cassandra
+    depends_on:
+      - cassandra-node1
     restart: on-failure # Restart until we successfully run this script (it will fail until cassandra starts)
+
 ######## SPARK ########
+  # Expose ports for monitoring.
+  # SparkContext web UI on 4040 -- only available for the duration of the application.
+  # Spark master’s web UI on 8080.
+  # Spark worker web UI on 8081.
   fortis-master:
     build: .
     env_file: .env
