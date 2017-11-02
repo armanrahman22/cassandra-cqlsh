@@ -17,6 +17,7 @@ echo "insert into fortis.streams (pipelinekey, streamid, streamfactory, pipeline
 echo "insert into fortis.streams (pipelinekey, streamid, streamfactory, pipelineicon, pipelinelabel, params, enabled) values ('RSS', uuid(), 'RSS', 'f fa-rss', 'RSS Feeds', { 'feedUrls': 'http://www.eltiempo.com/rss/economia.xml' }, true);" | cqlsh cassandra
 echo "insert into fortis.streams (pipelinekey, streamid, streamfactory, pipelineicon, pipelinelabel, params, enabled) values ('RSS', uuid(), 'RSS', 'f fa-rss', 'RSS Feeds', { 'feedUrls': 'http://www.eltiempo.com/rss/opinion.xml' }, true);" | cqlsh cassandra
 echo "insert into fortis.streams (pipelinekey, streamid, streamfactory, pipelineicon, pipelinelabel, params, enabled) values ('RSS', uuid(), 'RSS', 'f fa-rss', 'RSS Feeds', { 'feedUrls': 'http://www.eltiempo.com/rss/politica.xml' }, true);" | cqlsh cassandra
+echo "insert into fortis.streams (pipelinekey, streamid, enabled, params, pipelineicon, pipelinelabel, streamfactory) values ('Twitter', uuid(), True, {'consumerKey': 'ucyxNPXjuXP6Bk2h6RTHsbvSr', 'consumerSecret': 'I52jDoERPthFX3cZVpcqNU18xMFZMYuw1tCx0RuP79eUX6pQBY', 'accessToken': '808417685130321920-Szs6Wytce9W9Pazo7CGSnj0sRA36LoC', 'accessTokenSecret': '9miohljpfd56nTY1mbIk3SnVR7YFOah293Vhu8lQJZFbC'}, 'fa fa-twitter', 'Twitter', 'Twitter');" | cqlsh cassandra
 
 echo "select * from fortis.streams;" | cqlsh cassandra
 echo "### FORTIS STREAMS ADDED ###"

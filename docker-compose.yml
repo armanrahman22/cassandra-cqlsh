@@ -24,6 +24,7 @@ services:
       - cassandra-node1
     restart: on-failure
     stdin_open: true
+    tty: true
 
 ######## SPARK ########
   # Expose ports for monitoring.
@@ -40,5 +41,6 @@ services:
     links:
       - cassandra-node1:cassandra
     stdin_open: true
+    tty: true
     command: /bin/bash
     restart: on-failure
