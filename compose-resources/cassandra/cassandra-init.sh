@@ -1,4 +1,4 @@
-chmod +x /init/scripts/wait-for-it.sh
+#!/usr/bin/env bash
 /init/scripts/wait-for-it.sh cassandra-node1:9042 -- echo "CASSANDRA Node1 started"
 
 cqlsh -f /init/scripts/cassandra-setup.cql cassandra
@@ -18,4 +18,8 @@ echo "insert into fortis.streams (pipelinekey, streamid, streamfactory, pipeline
 echo "insert into fortis.streams (pipelinekey, streamid, streamfactory, pipelineicon, pipelinelabel, params, enabled) values ('RSS', uuid(), 'RSS', 'f fa-rss', 'RSS Feeds', { 'feedUrls': 'http://www.eltiempo.com/rss/opinion.xml' }, true);" | cqlsh cassandra
 echo "insert into fortis.streams (pipelinekey, streamid, streamfactory, pipelineicon, pipelinelabel, params, enabled) values ('RSS', uuid(), 'RSS', 'f fa-rss', 'RSS Feeds', { 'feedUrls': 'http://www.eltiempo.com/rss/politica.xml' }, true);" | cqlsh cassandra
 
-echo "### CASSANDRA INITIALISED! ###"
+echo "select * from fortis.streams;" | cqlsh cassandra
+echo "### FORTIS STREAMS ADDED ###"
+echo "### CASSANDRA FINISHED INITIALIZING! ###"
+
+/bin/bash

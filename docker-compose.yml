@@ -17,12 +17,13 @@ services:
     image: cassandra:3
     volumes:
       - ./compose-resources/cassandra:/init/scripts
-    command: bash /init/scripts/cassandra-init.sh
+    command: /init/scripts/cassandra-init.sh
     links:
       - cassandra-node1:cassandra
     depends_on:
       - cassandra-node1
-    restart: on-failure # Restart until we successfully run this script (it will fail until cassandra starts)
+    restart: on-failure
+    stdin_open: true
 
 ######## SPARK ########
   # Expose ports for monitoring.
@@ -39,5 +40,5 @@ services:
     links:
       - cassandra-node1:cassandra
     stdin_open: true
-    command: /bin/bash 
-    restart: always
+    command: /bin/bash
+    restart: on-failure
