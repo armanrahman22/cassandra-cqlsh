@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-/init/scripts/wait-for-it.sh cassandra-node1:9042 -- echo "CASSANDRA Node1 started"
+chmod +x /init/scripts/wait-for-it.sh
+/init/scripts/wait-for-it.sh --timeout=0 cassandra-node1:9042 -- echo "CASSANDRA Node1 started"
 
 cqlsh -f /init/scripts/cassandra-setup.cql cassandra
 echo "### SETUP EXECTUED! ###"

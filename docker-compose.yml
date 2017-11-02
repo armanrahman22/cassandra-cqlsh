@@ -40,7 +40,10 @@ services:
       - 8081
     links:
       - cassandra-node1:cassandra
+    volumes:
+      - ./compose-resources/spark:/init/scripts
+      - ./data/fortis-master:/root:rw
     stdin_open: true
     tty: true
-    command: /bin/bash
+    command: /init/scripts/spark-submit-cmd.sh
     restart: on-failure

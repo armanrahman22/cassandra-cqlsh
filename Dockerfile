@@ -51,7 +51,4 @@ WORKDIR /root
 # Spark worker web UI on 8081.
 # EXPOSE 4040 8080 8081
 
-RUN git clone https://github.com/CatalystCode/project-fortis-spark.git
-RUN cd project-fortis-spark && sbt assembly
-
 # CMD ["/bin/bash"]
